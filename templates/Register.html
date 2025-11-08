@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/Register.css">
+</head>
+
+<body>
+    <div class="content_register">
+        <div class="awal_register">
+            <div class="Logo_place">
+                <img src="/static/pcture/Logo.png" alt="">
+            </div>
+            <form method="post" action="/register">
+                <label for="name">Nama Lengkap</label>
+                <input id="name" type="text" name="name" placeholder="Nama Lengkap" value="{{ form_data.get('name','') }}">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="email@contoh.com" value="{{ form_data.get('email','') }}">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" placeholder="********">
+                
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="flash-messages">
+                    <ul>
+                    {% for m in messages %}
+                        <li>{{ m }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% endwith %}
+                <p>Sudah punya akun? <a href="/Login.html">Masuk</a></p>
+                <div class="button_register">
+                    <button type="submit">Daftar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

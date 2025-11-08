@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/Login.css">
+
+</head>
+
+<body>
+    <div class="content-login">
+        <div class="awal-login">
+            <div class="Logo_place">
+                <img src="/static/pcture/Logo.png" alt="Company logo">
+            </div>
+            <form method="post" action="/login">
+                <label for="email">Alamat Email</label>
+                <input id="email" type="email" name="email" placeholder="contoh@email.com" value="{{ form_data.get('email','') }}">
+                <label for="password">Kata Sandi</label>
+                <input id="password" type="password" name="password" placeholder="Masukkan kata sandi">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="flash-messages">
+                    {% for m in messages %}
+                        <div class="error-message">{{ m }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <p>Belum punya akun? <a href="/Register.html">Daftar sekarang</a></p>
+                <div class="button-container">
+                    <button type="submit">Masuk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

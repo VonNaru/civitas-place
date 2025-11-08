@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Keranjang Belanja</title>
+    <link rel="stylesheet" href="/static/css/cart.css">
+    <style>
+ 
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
+            <nav>
+                <a href="/Home_pages.html" class="nav-button">Kembali ke Toko</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-container">
+        <h2>Keranjang Belanja</h2>
+        {% if cart %}
+            {% for item in cart %}
+            <div class="cart-item">
+                <div>
+                    <div><strong>{{ item.name }}</strong></div>
+                    <div>Harga: Rp {{ '{:,.0f}'.format(item.price) }}</div>
+                    <div>Jumlah: {{ item.quantity }}</div>
+                </div>
+                <div>
+                    <form method="post" action="/remove_from_cart" style="display: inline;">
+                        <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                        <button type="submit" class="remove-btn">Hapus</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="cart-total">
+                Total: Rp {{ '{:,.0f}'.format(total) }}
+            </div>
+        {% else %}
+            <p>Keranjang belanja Anda masih kosong.</p>
+        {% endif %}
+        <a href="/Home_pages.html" class="back-to-shop">Lanjutkan Belanja</a>
+    </div>
+</body>
+</html>
