@@ -1,0 +1,123 @@
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* Menengahkan konten */
+}
+
+nav-button.cart{
+    background-color: black;
+}
+
+.product-detail {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgb(255, 163, 163);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-content {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.product-image {
+    flex: 0 0 50%;
+}
+
+.product-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 28px;
+    color: #e63946;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.product-description {
+    color: #555555;
+    line-height: 1.6;
+}
+
+.add-to-cart-form {
+    margin-top: 20px;
+}
+
+.quantity-input {
+    padding: 8px;
+    width: 80px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .container img {
+    height: 48px;
+    width: auto;
+    display: block;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header input[type="search"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+
+.nav-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.nav-button.cart {
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.nav-button.cart:hover {
+    background-color: #007bff;
+    color: white;
+}
