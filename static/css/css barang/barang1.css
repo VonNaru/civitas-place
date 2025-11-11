@@ -1,123 +1,209 @@
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    /* Menengahkan konten */
+/* === General Styling === */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-nav-button.cart{
-    background-color: black;
-}
-
-.product-detail {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px;
-    background: rgb(255, 163, 163);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.product-content {
-    display: flex;
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.product-image {
-    flex: 0 0 50%;
-}
-
-.product-image img {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.product-info {
-    flex: 1;
-}
-
-.product-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.product-price {
-    font-size: 28px;
-    color: #e63946;
-    font-weight: bold;
-    margin: 15px 0;
-}
-
-.product-description {
-    color: #555555;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Latar belakang abu-abu muda agar card produk menonjol */
+    color: #333;
     line-height: 1.6;
 }
 
-.add-to-cart-form {
-    margin-top: 20px;
-}
-
-.quantity-input {
-    padding: 8px;
-    width: 80px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
+/* === Header & Navigation Bar (Sesuai Permintaan) === */
 header {
-    background-color: #ffffff;
+    background-color: #1abc9c; /* Warna latar belakang navbar sesuai permintaan */
+    color: white;
     padding: 1rem 0;
-    border-bottom: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    width: 100%; /* Memastikan navbar penuh selebar layar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-header .container img {
-    height: 48px;
-    width: auto;
-    display: block;
+header a img {
+    height: 40px; /* Sesuaikan ukuran logo */
+    vertical-align: middle;
 }
 
 header nav {
     display: flex;
     align-items: center;
+    gap: 1rem; /* Jarak antar elemen di nav */
 }
 
-header input[type="search"] {
+header nav input[type="search"] {
     padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+header nav .nav-button {
+    background-color: white;
+    color: #1abc9c;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+header nav .nav-button:hover {
+    background-color: #f0f0f0;
+}
+
+header nav .nav-button.cart {
+    background-color: #f39c12; /* Warna oranye untuk tombol keranjang */
+    color: white;
+}
+
+header nav .nav-button.cart:hover {
+    background-color: #e67e22;
+}
+
+/* === Product Detail === */
+.product-detail {
+    max-width: 1100px;
+    margin: 2rem auto; /* Jarak dari header */
+    padding: 1rem;
+}
+
+.product-content {
+    display: flex;
+    gap: 2rem; /* Jarak antara gambar dan info */
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Product Image === */
+.product-image {
+    flex: 1; /* Mengambil 1 bagian dari flex container */
+    max-width: 50%;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+/* === Product Info === */
+.product-info {
+    flex: 1; /* Mengambil 1 bagian dari flex container */
+    display: flex;
+    flex-direction: column;
+}
+
+.product-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.product-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e74c3c; /* Warna merah untuk harga */
+    margin-bottom: 1.5rem;
+}
+
+.product-description h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.product-description p {
+    margin-bottom: 1rem;
+}
+
+.product-description ul {
+    list-style-position: inside;
+    margin-bottom: 1.5rem;
+}
+
+.product-description li {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+/* === Add to Cart Form === */
+.add-to-cart-form {
+    margin-top: auto; /* Mendorong form ke bagian bawah card */
+    display: flex;
+    gap: 1rem;
+}
+
+.quantity-input {
+    width: 70px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    text-align: center;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 1rem;
+    border-radius: 4px;
 }
 
-.nav-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid #007bff;
-    background-color: #007bff;
+.buy-button {
+    flex-grow: 1; /* Tombol mengambil sisa ruang */
+    background-color: #2ecc71; /* Warna hijau untuk tombol beli */
     color: white;
-    border-radius: 5px;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
     cursor: pointer;
-    margin-left: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
-.nav-button.cart {
-    background-color: transparent;
-    color: #007bff;
-    border: 1px solid #007bff;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+.buy-button:hover {
+    background-color: #27ae60;
 }
 
-.nav-button.cart:hover {
-    background-color: #007bff;
-    color: white;
+/* === Responsive (Untuk Layar HP) === */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .product-content {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+    
+    .product-image {
+        max-width: 100%;
+    }
+
+    .product-title {
+        font-size: 2rem;
+    }
+
+    .product-price {
+        font-size: 1.75rem;
+    }
+
+    .add-to-cart-form {
+        flex-direction: column;
+    }
+
+    .quantity-input {
+        width: 100%;
+    }
 }
