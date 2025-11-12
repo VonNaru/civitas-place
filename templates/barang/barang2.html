@@ -15,8 +15,21 @@
             <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
             <nav>
                 <input type="search" placeholder="Cari produk...">
-                <button class="nav-button">Dashboard</button>
-                <button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button>
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
+                
+                {% if session.get('user_name') %}
+                <details class="user-menu-details">
+                    <summary>{{ session.get('user_name') }} ▼</summary>
+                    <div class="dropdown-menu">
+                        <a href="/Dasboard.html">📊 Dashboard</a>
+                        <a href="/Dasboard.html">👤 Profil</a>
+                        <form method="POST" action="/logout">
+                            <button type="submit" class="logout-btn">🚪 Logout</button>
+                        </form>
+                    </div>
+                </details>
+                {% endif %}
             </nav>
         </div>
     </header>
@@ -40,7 +53,7 @@
                     </ul>
                 </div>
                 <form method="post" action="/add_to_cart" class="add-to-cart-form">
-                    <input type="hidden" name="product_id" value="p1">
+                    <input type="hidden" name="product_id" value="p_sepatu_2">
                     <input type="hidden" name="name" value="Sepatu">
                     <input type="hidden" name="price" value="450000">
                     <input type="number" name="quantity" value="1" min="1" class="quantity-input">

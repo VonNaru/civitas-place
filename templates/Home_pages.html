@@ -15,8 +15,21 @@
             </a>
             <nav>
                 <input type="search" placeholder="Cari produk...">
-                <button class="nav-button">Dashboard</button>
-                <button class="nav-button cart">Keranjang</button>
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
+                
+                {% if session.get('user_name') %}
+                <details class="user-menu-details">
+                    <summary>{{ session.get('user_name') }} ▼</summary>
+                    <div class="dropdown-menu">
+                        <a href="/Dasboard.html">📊 Dashboard</a>
+                        <a href="/Dasboard.html">👤 Profil</a>
+                        <form method="POST" action="/logout">
+                            <button type="submit" class="logout-btn">🚪 Logout</button>
+                        </form>
+                    </div>
+                </details>
+                {% endif %}
             </nav>
         </div>
     </header>
@@ -59,7 +72,7 @@
                     </div>
                 </a>
 
-                <a href="/barang/barang3.html" style="text-decoration: none; color: inherit;">
+                <a href="/barang/barang4.html" style="text-decoration: none; color: inherit;">
                     <div class="product-card">
                         <img src="/static/pcture/laptop.jpeg" alt="Gambar Produk">
                         <div class="product-info">
@@ -75,6 +88,7 @@
     </main>
 
     <footer>
+    </footer>
 
 </body>
 </html>

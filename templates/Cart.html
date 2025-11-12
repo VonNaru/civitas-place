@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Keranjang Belanja</title>
     <link rel="stylesheet" href="/static/css/cart.css">
+    <link rel="stylesheet" href="/static/css/home.css">
     <style>
  
     </style>
@@ -14,7 +15,22 @@
         <div class="container">
             <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
             <nav>
-                <a href="/Home_pages.html" class="nav-button">Kembali ke Toko</a>
+                <input type="search" placeholder="Cari produk...">
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
+                
+                {% if session.get('user_name') %}
+                <details class="user-menu-details">
+                    <summary>{{ session.get('user_name') }} ▼</summary>
+                    <div class="dropdown-menu">
+                        <a href="/Dasboard.html">📊 Dashboard</a>
+                        <a href="/Dasboard.html">👤 Profil</a>
+                        <form method="POST" action="/logout">
+                            <button type="submit" class="logout-btn">🚪 Logout</button>
+                        </form>
+                    </div>
+                </details>
+                {% endif %}
             </nav>
         </div>
     </header>
