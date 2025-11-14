@@ -11,5 +11,10 @@
     "username": "bjir@gmail.com",
     "password_hash": "pbkdf2:sha256:1000000$3kCdDZrxryWI8f5W$c7e89e0037011ea8706b7de575e21578590e2cbc1cff45eba83da0e077bc1862",
     "full_name": "Naru"
+  },
+  "MAX@gmail.com": {
+    "username": "MAX@gmail.com",
+    "password_hash": "pbkdf2:sha256:1000000$azEF6HmboNH333pP$72b1e507d5976fb76b38a889b5fced127b89e00dad913bcabd8bc0bf70c78463",
+    "full_name": "Max"
   }
 }
