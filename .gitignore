@@ -26,6 +26,7 @@ Thumbs.db
 
 # Application specific
 *.tmp
+orders.json
 orders.json.tmp
 user.json.tmp
 test_user.json
