@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Konfirmasi Pesanan</title>
+    <link rel="stylesheet" href="/static/css/cart.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <style>
+        .confirmation-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .success-icon {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .success-icon .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .success-icon h2 {
+            color: #4CAF50;
+            margin: 0;
+        }
+        
+        .order-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .order-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .order-info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .order-info-label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .order-info-value {
+            color: #333;
+            text-align: right;
+        }
+        
+        .order-items {
+            margin: 30px 0;
+        }
+        
+        .order-items h3 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.4em;
+            font-weight: bold;
+            padding: 20px 0;
+            margin-top: 15px;
+            border-top: 2px solid #333;
+        }
+        
+        .payment-info {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .payment-info strong {
+            color: #856404;
+        }
+        
+        .payment-info p {
+            margin: 10px 0 0 0;
+            color: #856404;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+            flex: 1;
+        }
+        
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
+            <nav>
+                <input type="search" placeholder="Cari produk...">
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
+                
+                {% if session.get('user_name') %}
+                <details class="user-menu-details">
+                    <summary>{{ session.get('user_name') }} ▼</summary>
+                    <div class="dropdown-menu">
+                        <a href="/Dasboard.html">👤 Profil</a>
+                        <form method="POST" action="/logout">
+                            <button type="submit" class="logout-btn">🚪 Logout</button>
+                        </form>
+                    </div>
+                </details>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <div class="confirmation-container">
+        <div class="success-icon">
+            <div class="checkmark">✓</div>
+            <h2>Pesanan Berhasil Dibuat!</h2>
+            <p style="color: #666; margin-top: 10px;">Terima kasih telah berbelanja dengan kami</p>
+        </div>
+        
+        <!-- Informasi Order -->
+        <div class="order-info">
+            <div class="order-info-row">
+                <span class="order-info-label">ID Pesanan:</span>
+                <span class="order-info-value"><strong>{{ order['order_id'] }}</strong></span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Tanggal Pesanan:</span>
+                <span class="order-info-value">{{ order['created_at'][:10] }} {{ order['created_at'][11:19] }}</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Status:</span>
+                <span class="order-info-value" style="color: #ff9800; font-weight: bold;">{{ order['status'].upper() }}</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Nama Penerima:</span>
+                <span class="order-info-value">{{ order['user_name'] }}</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Alamat Pengiriman:</span>
+                <span class="order-info-value" style="max-width: 400px;">{{ order['shipping_address'] }}</span>
+            </div>
+        </div>
+        
+        <!-- Detail Item Pesanan -->
+        <div class="order-items">
+            <h3>📦 Detail Pesanan</h3>
+            {% for item in order['items'] %}
+            <div class="order-item">
+                <div>
+                    <strong>{{ item.name }}</strong>
+                    <div style="color: #666; font-size: 0.9em;">
+                        Rp {{ '{:,.0f}'.format(item.price) }} × {{ item.quantity }}
+                    </div>
+                </div>
+                <div style="font-weight: bold;">
+                    Rp {{ '{:,.0f}'.format(item.price * item.quantity) }}
+                </div>
+            </div>
+            {% endfor %}
+            
+            <div class="order-total">
+                <span>Total Pembayaran:</span>
+                <span>Rp {{ '{:,.0f}'.format(order['total']) }}</span>
+            </div>
+        </div>
+        
+        <!-- Info Pembayaran -->
+        <div class="payment-info">
+            <strong>💰 Metode Pembayaran: {{ order['payment_method'] }}</strong>
+            <p>Pembayaran akan dilakukan saat barang tiba di lokasi Anda. Pastikan menyiapkan uang tunai sejumlah <strong>Rp {{ '{:,.0f}'.format(order['total']) }}</strong> untuk diserahkan kepada kurir.</p>
+        </div>
+        
+        <!-- Tombol Action -->
+        <div class="action-buttons">
+            <a href="/Home_pages.html" class="btn btn-primary">Lanjutkan Belanja</a>
+            <a href="/Dasboard.html" class="btn btn-secondary">Lihat Dashboard</a>
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <script>
+            {% for message in messages %}
+            alert("{{ message }}");
+            {% endfor %}
+        </script>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

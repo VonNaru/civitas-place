@@ -55,6 +55,16 @@
             <div class="cart-total">
                 Total: Rp {{ '{:,.0f}'.format(total) }}
             </div>
+            <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <form method="post" action="/clear_cart" style="flex: 1;">
+                    <button type="submit" class="remove-btn" style="width: 100%;">Kosongkan Keranjang</button>
+                </form>
+                <a href="/Checkout.html" style="flex: 2; text-decoration: none;">
+                    <button type="button" style="width: 100%; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold;">
+                        Lanjutkan ke Pembayaran (COD)
+                    </button>
+                </a>
+            </div>
         {% else %}
             <p>Keranjang belanja Anda masih kosong.</p>
         {% endif %}
