@@ -1,0 +1,40 @@
+{
+  "ORDER-20251116034951": {
+    "order_id": "ORDER-20251116034951",
+    "user_email": "test@example.com",
+    "user_name": "Test User",
+    "items": [
+      {
+        "name": "Sepatu",
+        "price": 450000,
+        "product_id": "p_sepatu_2",
+        "quantity": 1
+      }
+    ],
+    "total": 450000,
+    "payment_method": "COD",
+    "shipping_address": "Jl. Gatot Subroto No. 45, RT 03/RW 05, Kelurahan Kuningan, Kecamatan Setiabudi, Jakarta Selatan, DKI Jakarta 12950",
+    "status": "pending",
+    "created_at": "2025-11-16T03:49:51.488935",
+    "updated_at": "2025-11-16T03:49:51.488940"
+  },
+  "ORDER-20251116035203": {
+    "order_id": "ORDER-20251116035203",
+    "user_email": "test@example.com",
+    "user_name": "Test User",
+    "items": [
+      {
+        "name": "Headphone",
+        "price": 800000,
+        "product_id": "p_headphone_3",
+        "quantity": 1
+      }
+    ],
+    "total": 800000,
+    "payment_method": "COD",
+    "shipping_address": "Jl. Sudirman No. 100, RT 05/RW 08, Kelurahan Senayan, Kecamatan Kebayoran Baru, Jakarta Selatan, DKI Jakarta 12190",
+    "status": "pending",
+    "created_at": "2025-11-16T03:52:03.334482",
+    "updated_at": "2025-11-16T03:52:03.334489"
+  }
+}

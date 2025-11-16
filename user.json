@@ -16,5 +16,10 @@
     "username": "MAX@gmail.com",
     "password_hash": "pbkdf2:sha256:1000000$azEF6HmboNH333pP$72b1e507d5976fb76b38a889b5fced127b89e00dad913bcabd8bc0bf70c78463",
     "full_name": "Max"
+  },
+  "test@example.com": {
+    "username": "test@example.com",
+    "password_hash": "pbkdf2:sha256:1000000$u4lDl3QFg9YJP152$0fec46e86dfd4297c92ad3eb6828a601073ab4e882c60962599b3f226ae9a041",
+    "full_name": "Test User"
   }
 }

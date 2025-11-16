@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Checkout - Pembayaran COD</title>
+    <link rel="stylesheet" href="/static/css/cart.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <style>
+        .checkout-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .checkout-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+        
+        .checkout-section h3 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3em;
+            font-weight: bold;
+            padding: 15px 0;
+            margin-top: 10px;
+            border-top: 2px solid #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+        
+        .payment-method-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .payment-method-info strong {
+            color: #4CAF50;
+            font-size: 1.1em;
+        }
+        
+        .payment-method-info p {
+            margin: 10px 0 0 0;
+            color: #666;
+        }
+        
+        .checkout-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
+            <nav>
+                <input type="search" placeholder="Cari produk...">
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
+                
+                {% if session.get('user_name') %}
+                <details class="user-menu-details">
+                    <summary>{{ session.get('user_name') }} ▼</summary>
+                    <div class="dropdown-menu">
+                        <a href="/Dasboard.html">👤 Profil</a>
+                        <form method="POST" action="/logout">
+                            <button type="submit" class="logout-btn">🚪 Logout</button>
+                        </form>
+                    </div>
+                </details>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <div class="checkout-container">
+        <h2>Checkout - Pembayaran</h2>
+        
+        <!-- Ringkasan Pesanan -->
+        <div class="checkout-section">
+            <h3>📦 Ringkasan Pesanan</h3>
+            {% for item in cart %}
+            <div class="order-summary-item">
+                <div>
+                    <strong>{{ item.name }}</strong>
+                    <div style="color: #666; font-size: 0.9em;">
+                        Rp {{ '{:,.0f}'.format(item.price) }} × {{ item.quantity }}
+                    </div>
+                </div>
+                <div style="font-weight: bold;">
+                    Rp {{ '{:,.0f}'.format(item.price * item.quantity) }}
+                </div>
+            </div>
+            {% endfor %}
+            
+            <div class="order-total">
+                <span>Total Pembayaran:</span>
+                <span>Rp {{ '{:,.0f}'.format(total) }}</span>
+            </div>
+        </div>
+        
+        <!-- Form Alamat dan Checkout -->
+        <form method="POST" action="/process_checkout">
+            <!-- Alamat Pengiriman -->
+            <div class="checkout-section">
+                <h3>🏠 Alamat Pengiriman</h3>
+                <div class="form-group">
+                    <label for="shipping_address">Alamat Lengkap *</label>
+                    <textarea 
+                        id="shipping_address" 
+                        name="shipping_address" 
+                        required
+                        placeholder="Masukkan alamat lengkap untuk pengiriman&#10;Contoh: Jl. Merdeka No. 123, RT 01/RW 02, Kelurahan Kemayoran, Kecamatan Tanah Abang, Jakarta Pusat, DKI Jakarta 10110"
+                    ></textarea>
+                </div>
+            </div>
+            
+            <!-- Metode Pembayaran -->
+            <div class="checkout-section">
+                <h3>💰 Metode Pembayaran</h3>
+                <div class="payment-method-info">
+                    <strong>✓ Cash on Delivery (COD)</strong>
+                    <p>Pembayaran dilakukan saat barang diterima. Anda akan membayar langsung kepada kurir saat barang sampai di alamat tujuan.</p>
+                </div>
+            </div>
+            
+            <!-- Tombol Action -->
+            <div class="checkout-actions">
+                <a href="/Cart.html" class="btn btn-secondary">Kembali ke Keranjang</a>
+                <button type="submit" class="btn btn-primary">Konfirmasi Pesanan</button>
+            </div>
+        </form>
+    </div>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <script>
+            {% for message in messages %}
+            alert("{{ message }}");
+            {% endfor %}
+        </script>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
