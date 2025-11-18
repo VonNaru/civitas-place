@@ -39,8 +39,10 @@
                 <img src="/static/pcture/2-1.jpg" alt="Headphone">
             </div>
             <div class="product-info">
-                <h1 class="product-title">Sepatu</h1>
-                <p class="product-price">Rp 450.000</p>
+                <h1 class="product-title">{{ product.name if product else 'Sepatu' }}</h1>
+                <p class="product-price">Rp {{ '{:,.0f}'.format(product.price) if product else '450.000' }}</p>
+                <p><strong>Stok: </strong> {{ product.stock if product else 0 }}</p>
+
                 <div class="product-description">
                     <h3>Deskripsi Produk</h3>
                     <p>Produk keren dengan kualitas terbaik. Dibuat dengan material pilihan dan pengerjaan yang teliti.</p>
@@ -51,12 +53,17 @@
                         <li>Garansi 1 Tahun</li>
                     </ul>
                 </div>
+
                 <form method="post" action="/add_to_cart" class="add-to-cart-form">
-                    <input type="hidden" name="product_id" value="p_sepatu_2">
-                    <input type="hidden" name="name" value="Sepatu">
-                    <input type="hidden" name="price" value="450000">
-                    <input type="number" name="quantity" value="1" min="1" class="quantity-input">
-                    <button type="submit" class="buy-button">Tambah ke Keranjang</button>
+                    <input type="hidden" name="product_id" value="{{ product.id if product else 'p_sepatu_2' }}">
+                    <input type="hidden" name="name" value="{{ product.name if product else 'Sepatu' }}">
+                    <input type="hidden" name="price" value="{{ product.price if product else 450000 }}">
+                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock if product else 0 }}" class="quantity-input"
+                           {% if product and product.stock <= 0 %} disabled {% endif %}>
+                    <button type="submit" class="buy-button"
+                            {% if product and product.stock <= 0 %} disabled title="Stok habis" {% endif %}>
+                        {% if product and product.stock <= 0 %} Stok Habis {% else %} Tambah ke Keranjang {% endif %}
+                    </button>
                 </form>
             </div>
         </div>

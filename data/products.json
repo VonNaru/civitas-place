@@ -1,0 +1,30 @@
+{
+  "p_produk_1": {
+    "id": "p_produk_1",
+    "name": "Produk Keren 1",
+    "price": 150000,
+    "stock": 1,
+    "image": "/static/pcture/download.jpeg"
+  },
+  "p_sepatu_2": {
+    "id": "p_sepatu_2",
+    "name": "Sepatu",
+    "price": 450000,
+    "stock": 4,
+    "image": "/static/pcture/2-1.jpg"
+  },
+  "p_headphone_3": {
+    "id": "p_headphone_3",
+    "name": "Headphone",
+    "price": 800000,
+    "stock": 0,
+    "image": "/static/pcture/headsphone.jpeg"
+  },
+  "p_laptop_4": {
+    "id": "p_laptop_4",
+    "name": "Laptop",
+    "price": 22000000,
+    "stock": 2,
+    "image": "/static/pcture/laptop.jpeg"
+  }
+}

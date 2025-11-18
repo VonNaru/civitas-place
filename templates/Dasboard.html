@@ -12,11 +12,82 @@
             <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt="Logo"></a>
             <nav>
                 <input type="search" placeholder="Cari produk...">
-                <button class="nav-button">Dashboard</button>
-                <button class="nav-button cart">Keranjang</button>
+                <!-- ✅ PERBAIKAN 1: Tambah link ke Dashboard -->
+                <a href="/Dasboard.html" style="text-decoration: none;">
+                    <button class="nav-button">Dashboard</button>
+                </a>
+                <!-- ✅ PERBAIKAN 2: Tambah link ke Cart dengan counter -->
+                <a href="/Cart.html" style="text-decoration: none;">
+                    <button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button>
+                </a>
+                
+                <!-- ✅ PERBAIKAN 3: Tambah user dropdown menu -->
+                {% if session.get('user_name') %}
+                <details class="user-menu-details">
+                    <summary>{{ session.get('user_name') }} ▼</summary>
+                    <div class="dropdown-menu">
+                        <a href="/Dasboard.html">👤 Profil</a>
+                        <form method="POST" action="/logout">
+                            <button type="submit" class="logout-btn">🚪 Logout</button>
+                        </form>
+                    </div>
+                </details>
+                {% endif %}
             </nav>
         </div>
     </header>
-    <!-- Konten dashboard di sini -->
+    
+    <!-- ✅ PERBAIKAN 4: Tambah konten dashboard -->
+    <main class="dashboard-content">
+        <div class="container">
+            <h1>🎉 Selamat Datang, {{ session.get('user_name', 'User') }}!</h1>
+            
+            <div class="dashboard-grid">
+                <!-- Quick Stats -->
+                <div class="dashboard-card">
+                    <h3>📊 Statistik Belanja</h3>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">{{ cart_count|default(0) }}</span>
+                            <span class="stat-label">Item di Keranjang</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Total Pesanan</span>
+                        </div>
+                    </div>
+                    <!-- ✅ TOMBOL LANGSUNG KE CART -->
+                    <a href="/Cart.html" class="btn-primary">🛒 Lihat Keranjang</a>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="dashboard-card">
+                    <h3>⚡ Quick Actions</h3>
+                    <div class="action-buttons">
+                        <a href="/Cart.html" class="btn-cart">🛒 Keranjang Saya</a>
+                        <a href="/Home_pages.html" class="btn-shop">🛍️ Lanjut Belanja</a>
+                    </div>
+                </div>
+                
+                <!-- Kelola Stok Produk -->
+                <div class="dashboard-card">
+                    <h3>⚙️ Kelola Stok Produk</h3>
+                    <div>
+                        {% for pid, p in products.items() %}
+                        <form method="post" action="/update_stock" style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+                            <input type="hidden" name="product_id" value="{{ pid }}">
+                            <div style="flex:1; text-align:left;">
+                                <strong>{{ p.name }}</strong><br>
+                                Harga: Rp {{ '{:,.0f}'.format(p.price) }}
+                            </div>
+                            <input type="number" name="stock" value="{{ p.stock }}" min="0" style="width:80px; padding:6px;">
+                            <button type="submit" class="btn-primary" style="padding:6px 10px;">Simpan</button>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

@@ -1,46 +1,26 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template
 from utils.decorators import login_required
 from models.cart import CartManager
+from models.products import ProductsManager
 
 # Buat blueprint untuk product routes
 products_bp = Blueprint('products', __name__, url_prefix='/barang')
 
-@products_bp.route('/Barang1.html')
+@products_bp.route('/<product_template>')
 @login_required
-def barang1_page():
+def product_page(product_template):
     """
-    Halaman detail untuk Produk Keren 1.
-    Menghitung jumlah item di keranjang untuk navbar.
+    Dynamic render: /barang/Barang1.html  => product id mapping inside template usage
+    For backward compatibility, detect product id from template name.
     """
     cart_count = CartManager.get_cart_count()
-    return render_template('barang/Barang1.html', cart_count=cart_count)
-
-@products_bp.route('/barang2.html')
-@login_required
-def barang2_page():
-    """
-    Halaman detail untuk Sepatu Lari Cepat.
-    Menghitung jumlah item di keranjang untuk navbar.
-    """
-    cart_count = CartManager.get_cart_count()
-    return render_template('barang/barang2.html', cart_count=cart_count)
-
-@products_bp.route('/barang3.html')
-@login_required
-def barang3_page():
-    """
-    Halaman detail untuk Headphone Super Bass.
-    Menghitung jumlah item di keranjang untuk navbar.
-    """
-    cart_count = CartManager.get_cart_count()
-    return render_template('barang/barang3.html', cart_count=cart_count)
-
-@products_bp.route('/barang4.html')
-@login_required
-def barang4_page():
-    """
-    Halaman detail untuk Laptop Gaming.
-    Menghitung jumlah item di keranjang untuk navbar.
-    """
-    cart_count = CartManager.get_cart_count()
-    return render_template('barang/barang4.html', cart_count=cart_count)
+    # map template name to product_id (simple mapping)
+    mapping = {
+        'Barang1.html': 'p_produk_1',
+        'barang2.html': 'p_sepatu_2',
+        'barang3.html': 'p_headphone_3',
+        'barang4.html': 'p_laptop_4'
+    }
+    product_id = mapping.get(product_template)
+    product = ProductsManager.get(product_id) if product_id else None
+    return render_template(f'barang/{product_template}', cart_count=cart_count, product=product)

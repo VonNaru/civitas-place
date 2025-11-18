@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +10,18 @@
 
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
             <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
             <nav>
                 <input type="search" placeholder="Cari produk...">
-                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
-                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
-                
+                <a href="/Dasboard.html" style="text-decoration: none;"><button
+                        class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{
+                        cart_count|default(0) }})</button></a>
+
                 {% if session.get('user_name') %}
                 <details class="user-menu-details">
                     <summary>{{ session.get('user_name') }} ▼</summary>
@@ -39,11 +43,14 @@
                 <img src="/static/pcture/download.jpeg  " alt="Produk Keren 1">
             </div>
             <div class="product-info">
-                <h1 class="product-title">Produk Keren 1</h1>
-                <p class="product-price">Rp 150.000</p>
+                <h1 class="product-title">{{ product.name if product else 'Produk Keren 1' }}</h1>
+                <p class="product-price">Rp {{ '{:,.0f}'.format(product.price) if product else '150.000' }}</p>
+                <p><strong>Stok: </strong> {{ product.stock if product else 0 }}</p>
+                <!-- jika stok 0, disable form -->
                 <div class="product-description">
                     <h3>Deskripsi Produk</h3>
-                    <p>Produk keren dengan kualitas terbaik. Dibuat dengan material pilihan dan pengerjaan yang teliti.</p>
+                    <p>Produk keren dengan kualitas terbaik. Dibuat dengan material pilihan dan pengerjaan yang teliti.
+                    </p>
                     <ul>
                         <li>Kualitas Premium</li>
                         <li>Bahan Tahan Lama</li>
@@ -51,16 +58,22 @@
                         <li>Garansi 1 Tahun</li>
                     </ul>
                 </div>
+                <!-- Descripsi produk -->
                 <form method="post" action="/add_to_cart" class="add-to-cart-form">
-                    <input type="hidden" name="product_id" value="p_produk_1">
-                    <input type="hidden" name="name" value="Produk Keren 1">
-                    <input type="hidden" name="price" value="150000">
-                    <input type="number" name="quantity" value="1" min="1" class="quantity-input">
-                    <button type="submit" class="buy-button">Tambah ke Keranjang</button>
+                    <input type="hidden" name="product_id" value="{{ product.id if product else 'p_produk_1' }}">
+                    <input type="hidden" name="name" value="{{ product.name if product else 'Produk Keren 1' }}">
+                    <input type="hidden" name="price" value="{{ product.price if product else 150000 }}">
+                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock if product else 0 }}"
+                        class="quantity-input" {% if product and product.stock <=0 %} disabled {% endif %}>
+                    <button type="submit" class="buy-button" {% if product and product.stock <=0 %} disabled
+                        title="Stok habis" {% endif %}>
+                        {% if product and product.stock <= 0 %} Stok Habis {% else %} Tambah ke Keranjang {% endif %}
+                            </button>
                 </form>
             </div>
         </div>
     </div>
 
 </body>
+
 </html>

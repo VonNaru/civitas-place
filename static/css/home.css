@@ -2,13 +2,15 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #ffffff; /* Warna latar belakang halaman */
+    background-color: #ffffff;
 }
 
+/* Container lebih lebar untuk menampung 4 produk */
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto; /* Menengahkan konten */
+    width: 95%;
+    max-width: 1400px; /* Perbesar untuk 4 kolom */
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 /* === Pengaturan Header === */
@@ -20,14 +22,13 @@ header {
 }
 
 header .container {
-    display: flex; /* Menggunakan Flexbox */
-    justify-content: space-between; /* Logo di kiri, nav di kanan */
-    align-items: center; /* Menengahkan secara vertikal */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Kecilkan logo di header agar muat di navbar */
 header .container img {
-    height: 48px; /* sesuaikan tinggi logo */
+    height: 48px;
     width: auto;
     display: block;
 }
@@ -68,10 +69,10 @@ header input[type="search"] {
 .nav-button:hover{
     background-color:#007bff;
     color: white;
-    animation-delay: 2s;
+    transition: all 0.3s ease;
 }
 
-/* === Pengaturan User Menu Dropdown (dengan <details> tag) === */
+/* === User Menu Dropdown === */
 .user-menu-details {
     position: relative;
     display: inline-block;
@@ -97,12 +98,10 @@ header input[type="search"] {
     background-color: #e0e0e0;
 }
 
-/* Hapus default arrow dari <details> di Chrome/Firefox */
 .user-menu-details summary::-webkit-details-marker {
     display: none;
 }
 
-/* Dropdown Menu */
 .user-menu-details .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -117,7 +116,6 @@ header input[type="search"] {
     display: none;
 }
 
-/* Saat <details> terbuka, tampilkan dropdown */
 .user-menu-details[open] .dropdown-menu {
     display: block;
     animation: slideDown 0.2s ease;
@@ -157,17 +155,6 @@ header input[type="search"] {
     padding-left: 1.5rem;
 }
 
-.user-menu-details .dropdown-menu a:first-child {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.user-menu-details .dropdown-menu a:last-child,
-.user-menu-details .dropdown-menu .logout-btn {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
 .user-menu-details .dropdown-menu .logout-btn {
     color: #e63946;
     font-weight: bold;
@@ -178,7 +165,7 @@ header input[type="search"] {
     color: #c1121f;
 }
 
-/* === Pengaturan Grid Produk === */
+/* === Pengaturan Main Content === */
 main {
     padding: 2rem 0;
 }
@@ -189,67 +176,129 @@ main h2 {
     color: #333;
 }
 
+/* === Grid Produk: 4 kolom dengan jarak yang rapi === */
 .product-grid {
     display: grid;
-    /* Membuat kolom responsif: */
-    /* - auto-fill: Isi sebanyak mungkin kolom */
-    /* - minmax(250px, 1fr): Setiap kolom minimal 250px, dan bisa membesar (1fr) */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px; /* Jarak antar kartu */
+    grid-template-columns: repeat(4, 1fr); /* 4 kolom sama lebar */
+    gap: 3px; /* Jarak antar produk diperbesar */
+    padding: 0 15px; /* Padding samping */
 }
 
-/* === Pengaturan Kartu Produk === */
+/* === Kartu Produk === */
 .product-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    overflow: hidden; /* Memastikan gambar tidak keluar dari radius */
-    transition: transform 0.2s ease-in-out;
+    border-radius: 12px; /* Border radius lebih smooth */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Shadow lebih halus */
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-5px); /* Efek mengangkat saat di-hover */
+    transform: translateY(-8px); /* Efek hover lebih halus */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .product-card img {
     width: 100%;
-    height: 200px; /* Tinggi gambar dibuat seragam */
-    object-fit: cover; /* Memastikan gambar pas tanpa distorsi */
+    height: 200px; /* Tinggi gambar diperbesar */
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
 }
 
 .product-info {
-    padding: 1rem;
+    padding: 1.25rem; /* Padding lebih besar */
     text-align: center;
 }
 
 .product-info h3 {
-    margin: 0.5rem 0;
-    font-size: 1.2rem;
+    margin: 0 0 0.75rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.4;
 }
 
 .price {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: bold;
-    color: #e63946; /* Warna merah untuk harga */
-    margin-bottom: 1rem;
+    color: #e63946;
+    margin-bottom: 1.25rem;
 }
 
 .buy-button {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.85rem;
     background-color: #2a9d8f;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .buy-button:hover {
     background-color: #264653;
+    transform: translateY(-2px);
+}
+
+/* === Responsive Design === */
+/* Large Desktop: 4 kolom */
+@media (min-width: 1200px) {
+    .product-grid { 
+        grid-template-columns: repeat(4, 1fr);
+        gap: 35px;
+    }
+}
+
+/* Desktop: 4 kolom */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .product-grid { 
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+}
+
+/* Tablet Large: 3 kolom */
+@media (max-width: 991px) and (min-width: 768px) {
+    .product-grid { 
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Tablet Small: 2 kolom */
+@media (max-width: 767px) and (min-width: 576px) {
+    .product-grid { 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .product-card img {
+        height: 180px;
+    }
+}
+
+/* Mobile: 1 kolom */
+@media (max-width: 575px) {
+    .product-grid { 
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .product-card img {
+        height: 200px;
+    }
+    
+    header .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
 
 
