@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Civitas Market</title>
+    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="/static/css/checkout.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
+            <nav>
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
+                
+                {% if session.get('user_name') %}
+                <details class="user-menu-details">
+                    <summary>{{ session.get('user_name') }} ▼</summary>
+                    <div class="dropdown-menu">
+                        <a href="/Dasboard.html">👤 Profil</a>
+                        <form method="POST" action="/logout">
+                            <button type="submit" class="logout-btn">🚪 Logout</button>
+                        </form>
+                    </div>
+                </details>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages-container">
+                {% for category, message in messages %}
+                    <div class="flash-message {% if category == 'success' %}flash-success{% elif category == 'error' %}flash-error{% else %}flash-info{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="checkout-container">
+        <h1>🛒 Checkout</h1>
+
+        <!-- Info COD -->
+        <div class="alert alert-info">
+            ℹ️ <strong>Metode Pembayaran:</strong> COD (Bayar saat mengambil barang di lokasi pickup)
+        </div>
+
+        <form method="POST" action="{{ url_for('checkout.place_order') }}" novalidate>
+
+            <!-- STEP 1: Ringkasan Pesanan -->
+            <div class="checkout-section">
+                <div class="section-title">📦 Ringkasan Pesanan</div>
+                
+                <div class="order-summary">
+                    {% for item in cart %}
+                    <div class="summary-item">
+                        <span>{{ item.name }} x {{ item.quantity }}</span>
+                        <span>Rp {{ '{:,.0f}'.format(item.price * item.quantity) }}</span>
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span>Rp {{ '{:,.0f}'.format(total) }}</span>
+                    </div>
+                </div>
+                
+                <input type="hidden" name="total" value="{{ total }}">
+            </div>
+
+            <!-- STEP 2: Pilih Lokasi Pickup -->
+            <div class="checkout-section">
+                <div class="section-title">📍 Pilih Lokasi Pengambilan</div>
+                
+                <p class="location-notice">
+                    ⚠️ Semua lokasi berada di lingkungan universitas
+                </p>
+                
+                <!-- ✅ PERBAIKAN: Loop pickup_locations dengan benar -->
+                {% if pickup_locations %}
+                    {% for location_id, location in pickup_locations.items() %}
+                    <label class="location-label">
+                        <input type="radio" name="pickup_location" value="{{ location.id }}" required>
+                        <div class="location-card">
+                            <div class="location-name">{{ location.name }}</div>
+                            <div class="location-info">📌 {{ location.address }}</div>
+                            <div class="location-info">🕒 Jam Operasional: {{ location.operating_hours }}</div>
+                            <div class="location-info">📞 {{ location.phone }}</div>
+                            {% if location.description %}
+                            <div class="location-description">{{ location.description }}</div>
+                            {% endif %}
+                        </div>
+                    </label>
+                    {% endfor %}
+                {% else %}
+                    <p class="no-locations">Tidak ada lokasi pengambilan tersedia.</p>
+                {% endif %}
+            </div>
+
+            <!-- STEP 3: Data Pengambil -->
+            <div class="checkout-section">
+                <div class="section-title">👤 Data Penerima</div>
+                
+                <div class="form-group">
+                    <label>Nama Lengkap: <span class="required-field">*</span></label>
+                    <input type="text" name="fullname" value="{{ session.get('user_name', '') }}" required minlength="3">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email: <span class="required-field">*</span></label>
+                    <input type="email" name="email" value="{{ session.get('user_email', '') }}" required readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nomor Telepon: <span class="required-field">*</span></label>
+                    <input type="text" name="phone" placeholder="Contoh: 081234567890" required pattern="[0-9]{10,15}">
+                </div>
+                
+                <div class="form-group">
+                    <label>Catatan/Pesan Tambahan (Opsional):</label>
+                    <textarea name="notes" placeholder="Contoh: Ingin diambil jam 15:00, barang fragile, dll" maxlength="500"></textarea>
+                </div>
+            </div>
+
+            <!-- STEP 4: Metode Pembayaran -->
+            <div class="checkout-section">
+                <div class="section-title">💳 Metode Pembayaran</div>
+                
+                <div class="payment-method-box">
+                    <div class="payment-icon">💵</div>
+                    <div class="payment-title">Bayar di Tempat (COD)</div>
+                    <div class="payment-desc">Bayar saat mengambil barang di lokasi pickup</div>
+                </div>
+                
+                <input type="hidden" name="payment_method" value="cod">
+            </div>
+
+            <!-- STEP 5: Terms & Conditions -->
+            <div class="checkout-section">
+                <div class="form-group">
+                    <label class="terms-checkbox">
+                        <input type="checkbox" name="terms_agreed" required>
+                        <span>Saya setuju dengan syarat dan ketentuan pembelian <span class="required-field">*</span></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="/Cart.html" class="btn-back">← Kembali ke Keranjang</a>
+                <button type="submit" class="btn-place-order">
+                    ✓ Konfirmasi Pesanan (Rp {{ '{:,.0f}'.format(total) }})
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

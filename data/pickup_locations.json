@@ -1,0 +1,42 @@
+{
+  "loc_library": {
+    "id": "loc_library",
+    "name": "Perpustakaan Utama",
+    "address": "Gedung Perpustakaan Kampus, Lantai Gf",
+    "operating_hours": "08:00 - 17:00",
+    "phone": "021-12345678",
+    "description": "Lobi utama perpustakaan, dekat dengan meja informasi"
+  },
+  "loc_canteen": {
+    "id": "loc_canteen",
+    "name": "Kafeteria Kantin Utama", 
+    "address": "Gedung Student Center, Lantai 2",
+    "operating_hours": "10:00 - 18:00",
+    "phone": "021-12345679",
+    "description": "Area kasir kafeteria, meja pickup khusus"
+  },
+  "loc_student_center": {
+    "id": "loc_student_center",
+    "name": "Student Center",
+    "address": "Gedung Student Center, Lantai 1", 
+    "operating_hours": "09:00 - 19:00",
+    "phone": "021-12345680",
+    "description": "Lobby utama Student Center, meja layanan mahasiswa"
+  },
+  "loc_kantin": {
+    "id": "loc_kantin",
+    "name": "Kantin Kampus",
+    "address": "Area Kantin Utama, Lantai 1",
+    "operating_hours": "08:00 - 18:00",
+    "phone": "021-12345678",
+    "description": "Di area kasir kantin, dekat dengan pintu masuk utama"
+  },
+  "loc_setulo_pradita": {
+    "id": "loc_setulo_pradita",
+    "name": "Setulo Pradita",
+    "address": "Gedung Setulo Pradita, Lantai 2",
+    "operating_hours": "09:00 - 17:00",
+    "phone": "021-12345679",
+    "description": "Lobby utama gedung Setulo Pradita, meja informasi"
+  }
+}

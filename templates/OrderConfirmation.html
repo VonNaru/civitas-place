@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pesanan</title>
+    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="/static/css/order-confirmation.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
+            <nav>
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="confirmation-container">
+        <div class="success-icon">✅</div>
+        <h1>Pesanan Berhasil Dibuat!</h1>
+        
+        <div class="confirmation-box">
+            <p class="confirmation-message">
+                Pesanan Anda siap diproses. Silakan ambil barang di lokasi pickup yang telah dipilih.
+            </p>
+            
+            <div class="order-id">
+                Order ID: {{ order.order_id }}
+            </div>
+            
+            <div class="info-section">
+                <div class="info-label">👤 Nama Penerima:</div>
+                <div class="info-value">{{ order.fullname }}</div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-label">📧 Email:</div>
+                <div class="info-value">{{ order.user_email }}</div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-label">📱 Nomor Telepon:</div>
+                <div class="info-value">{{ order.phone }}</div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-label">📍 Lokasi Pengambilan:</div>
+                <div class="info-value">{{ location.name }}</div>
+                <div class="info-value location-details">
+                    {{ location.address }}<br>
+                    Jam Operasional: {{ location.operating_hours }}<br>
+                    Telepon: {{ location.phone }}
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-label">💰 Total Pembayaran:</div>
+                <div class="info-value total-amount">
+                    Rp {{ '{:,.0f}'.format(order.total) }}
+                </div>
+                <div class="info-value payment-method-info">
+                    Metode: Bayar di Tempat (COD)
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-label">📦 Status Pesanan:</div>
+                <div class="info-value order-status">
+                    ⏳ Menunggu Pembayaran
+                </div>
+            </div>
+            
+            <!-- ✅ PERBAIKAN: Akses items sebagai dictionary key, bukan method -->
+            <div class="info-section">
+                <div class="info-label">📞 Kontak Penjual untuk Setiap Item:</div>
+                
+                {% if order['items'] %}
+                    {% for item in order['items'] %}
+                    <div class="item-contact">
+                        <div class="item-header">
+                            <strong>{{ item.name }}</strong>
+                            <span class="item-quantity">({{ item.quantity }}x)</span>
+                        </div>
+                        
+                        <div class="item-details">
+                            <div class="contact-info">
+                                📞 <strong>Kontak Penjual:</strong> 
+                                <span class="phone-number">{{ item.phone if item.phone else 'Tidak tersedia' }}</span>
+                            </div>
+                            
+                            <div class="price-info">
+                                💰 <strong>Subtotal:</strong> 
+                                <span class="subtotal">Rp {{ '{:,.0f}'.format(item.price * item.quantity) }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-separator"></div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-items">Tidak ada item dalam pesanan</div>
+                {% endif %}
+            </div>
+            
+            {% if order.notes %}
+            <div class="info-section">
+                <div class="info-label">📝 Catatan:</div>
+                <div class="info-value">{{ order.notes }}</div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="btn-group">
+            <a href="{{ url_for('checkout.order_history') }}" class="btn btn-primary">📋 Lihat Pesanan Saya</a>
+            <a href="/Home_pages.html" class="btn btn-secondary">🛍️ Lanjut Belanja</a>
+        </div>
+    </div>
+</body>
+</html>

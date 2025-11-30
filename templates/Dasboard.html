@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard - Civitas Market</title>
+    <link rel="stylesheet" href="/static/css/home.css">
     <link rel="stylesheet" href="/static/css/dasboard.css">
 </head>
 <body>
@@ -11,15 +12,9 @@
         <div class="container">
             <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt="Logo"></a>
             <nav>
-                <input type="search" placeholder="Cari produk...">
-                <!-- ✅ PERBAIKAN 1: Tambah link ke Dashboard -->
-                <a href="/Dasboard.html" style="text-decoration: none;">
-                    <button class="nav-button">Dashboard</button>
-                </a>
-                <!-- ✅ PERBAIKAN 2: Tambah link ke Cart dengan counter -->
-                <a href="/Cart.html" style="text-decoration: none;">
-                    <button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button>
-                </a>
+                <!-- ❌ HAPUS: <input type="search" placeholder="Cari produk..."> -->
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
                 
                 <!-- ✅ PERBAIKAN 3: Tambah user dropdown menu -->
                 {% if session.get('user_name') %}

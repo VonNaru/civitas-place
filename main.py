@@ -6,6 +6,7 @@ from routes.auth import auth_bp
 from routes.pages import pages_bp
 from routes.products import products_bp
 from routes.cart import cart_bp
+from routes.checkout import checkout_bp
 
 def create_app(config_name=None):
     """
@@ -24,6 +25,7 @@ def create_app(config_name=None):
     app.register_blueprint(pages_bp)
     app.register_blueprint(products_bp)
     app.register_blueprint(cart_bp)
+    app.register_blueprint(checkout_bp)
     
     @app.route('/')
     def index():

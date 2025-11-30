@@ -6,16 +6,12 @@
     <title>Keranjang Belanja</title>
     <link rel="stylesheet" href="/static/css/cart.css">
     <link rel="stylesheet" href="/static/css/home.css">
-    <style>
- 
-    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
             <nav>
-                <input type="search" placeholder="Cari produk...">
                 <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
                 <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
                 
@@ -34,32 +30,77 @@
         </div>
     </header>
 
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages-container">
+                {% for category, message in messages %}
+                    <div class="flash-message {% if category == 'success' %}flash-success{% elif category == 'error' %}flash-error{% else %}flash-info{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
     <div class="cart-container">
-        <h2>Keranjang Belanja</h2>
+        <h2>🛒 Keranjang Belanja</h2>
+        
         {% if cart %}
             {% for item in cart %}
             <div class="cart-item">
-                <div>
-                    <div><strong>{{ item.name }}</strong></div>
-                    <div>Harga: Rp {{ '{:,.0f}'.format(item.price) }}</div>
-                    <div>Jumlah: {{ item.quantity }}</div>
+                <div class="item-details">
+                    <div class="item-name"><strong>{{ item.name }}</strong></div>
+                    <div class="item-price">Harga: Rp {{ '{:,.0f}'.format(item.price) }}</div>
+                    <div class="item-quantity">Jumlah: {{ item.quantity }}</div>
+                    <div class="item-subtotal">Subtotal: Rp {{ '{:,.0f}'.format(item.price * item.quantity) }}</div>
+                    {% if item.phone %}
+                    <div class="item-contact">📞 Kontak: {{ item.phone }}</div>
+                    {% endif %}
                 </div>
-                <div>
+                <div class="item-actions">
                     <form method="post" action="/remove_from_cart" style="display: inline;">
                         <input type="hidden" name="product_id" value="{{ item.product_id }}">
-                        <button type="submit" class="remove-btn">Hapus</button>
+                        <button type="submit" class="remove-btn">🗑️ Hapus</button>
                     </form>
                 </div>
             </div>
             {% endfor %}
+            
             <div class="cart-total">
-                Total: Rp {{ '{:,.0f}'.format(total) }}
+                <strong>Total: Rp {{ '{:,.0f}'.format(total) }}</strong>
             </div>
+            
         {% else %}
-            <p>Keranjang belanja Anda masih kosong.</p>
+            <div class="empty-cart">
+                <div class="empty-icon">🛒</div>
+                <h3>Keranjang belanja Anda masih kosong</h3>
+                <p>Silakan pilih produk yang Anda inginkan</p>
+            </div>
         {% endif %}
-        <a href="/Home_pages.html" class="back-to-shop">Lanjutkan Belanja</a>
-        <a href="#" class="Pembayaran">Pembayaran</a>
+        
+        <!-- ✅ PERBAIKAN: Hapus link yang rusak dan ganti dengan yang benar -->
+        <div class="cart-actions">
+            {% if cart %}
+                <a href="{{ url_for('checkout.checkout') }}" class="checkout-btn">
+                    💳 Checkout (Rp {{ '{:,.0f}'.format(total) }})
+                </a>
+                <form method="POST" action="{{ url_for('cart.clear_cart') }}" style="display: inline;">
+                    <button type="submit" class="clear-cart-btn" 
+                            onclick="return confirm('Yakin ingin mengosongkan keranjang?')">
+                        🗑️ Kosongkan Keranjang
+                    </button>
+                </form>
+            {% else %}
+                <a href="{{ url_for('pages.home_page') }}" class="continue-shopping">
+                    🛍️ Lanjut Belanja
+                </a>
+            {% endif %}
+        </div>
+        
+        <div class="back-to-shop">
+            <a href="/Home_pages.html">← Kembali ke Beranda</a>
+        </div>
     </div>
 </body>
 </html>

@@ -32,6 +32,7 @@ def login():
     # Login berhasil - simpan data user ke session
     session['user_id'] = email
     session['user_name'] = user.get('full_name', 'User')
+    session['user_email'] = email  # ← TAMBAHAN: Simpan email untuk checkout
     
     # Tampilkan pesan selamat datang
     flash(f'Selamat datang, {user.get("full_name", "User")}!')

@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk</title>
     <link rel="stylesheet" href="/static/css/css barang/barang1.css">
-    <style>
-
-    </style>
 </head>
 
 <body>
@@ -16,12 +13,10 @@
         <div class="container">
             <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
             <nav>
-                <input type="search" placeholder="Cari produk...">
-                <a href="/Dasboard.html" style="text-decoration: none;"><button
-                        class="nav-button">Dashboard</button></a>
-                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{
-                        cart_count|default(0) }})</button></a>
 
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
+                
                 {% if session.get('user_name') %}
                 <details class="user-menu-details">
                     <summary>{{ session.get('user_name') }} ▼</summary>
@@ -46,11 +41,11 @@
                 <h1 class="product-title">{{ product.name if product else 'Headphone' }}</h1>
                 <p class="product-price">Rp {{ '{:,.0f}'.format(product.price) if product else '800.000' }}</p>
                 <p><strong>Stok: </strong> {{ product.stock if product else 0 }}</p>
-                <!-- jika stok 0, disable form -->
+                <p><strong>📞 Kontak Penjual: </strong> {{ product.phone if product else '081234567892' }}</p>
+
                 <div class="product-description">
                     <h3>Deskripsi Produk</h3>
-                    <p>Headphone premium dengan kualitas suara jernih dan bass yang menggelegar. Desain ergonomis untuk kenyamanan maksimal saat digunakan dalam waktu lama.
-                    </p>
+                    <p>Headphone premium dengan kualitas suara jernih dan bass yang menggelegar. Desain ergonomis untuk kenyamanan maksimal saat digunakan dalam waktu lama.</p>
                     <ul>
                         <li>Kualitas Audio Premium</li>
                         <li>Bass yang Mendalam</li>
@@ -58,22 +53,21 @@
                         <li>Noise Cancelling</li>
                     </ul>
                 </div>
-                <!-- Descripsi produk -->
+
                 <form method="post" action="/add_to_cart" class="add-to-cart-form">
                     <input type="hidden" name="product_id" value="{{ product.id if product else 'p_headphone_3' }}">
                     <input type="hidden" name="name" value="{{ product.name if product else 'Headphone' }}">
                     <input type="hidden" name="price" value="{{ product.price if product else 800000 }}">
-                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock if product else 0 }}"
-                        class="quantity-input" {% if product and product.stock <=0 %} disabled {% endif %}>
-                    <button type="submit" class="buy-button" {% if product and product.stock <=0 %} disabled
-                        title="Stok habis" {% endif %}>
+                    <input type="hidden" name="phone" value="{{ product.phone if product else '081234567892' }}">
+                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock if product else 0 }}" class="quantity-input"
+                           {% if product and product.stock <= 0 %} disabled {% endif %}>
+                    <button type="submit" class="buy-button"
+                            {% if product and product.stock <= 0 %} disabled title="Stok habis" {% endif %}>
                         {% if product and product.stock <= 0 %} Stok Habis {% else %} Tambah ke Keranjang {% endif %}
                     </button>
                 </form>
             </div>
         </div>
     </div>
-
 </body>
-
 </html>

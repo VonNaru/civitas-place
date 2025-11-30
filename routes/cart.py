@@ -16,6 +16,7 @@ def add_to_cart():
     product_id = request.form.get('product_id')
     name = request.form.get('name')
     price = request.form.get('price')
+    phone = request.form.get('phone')  # Nomor telepon penjual
     quantity = int(request.form.get('quantity', 1))
     
     # Validasi data produk
@@ -35,10 +36,12 @@ def add_to_cart():
         flash('Gagal mengupdate stok. Silakan coba lagi.', 'error')
         return redirect(request.referrer or url_for('pages.home_page'))
 
-    # Tambahkan ke keranjang
-    CartManager.add_to_cart(product_id, name, price, quantity)
+    # Tambahkan ke keranjang dengan nomor telepon
+    CartManager.add_to_cart(product_id, name, price, quantity, phone)
     flash(f'✅ {name} berhasil ditambahkan ke keranjang!', 'success')
-    return redirect(url_for('cart.cart_page'))  # ← HARUS ke cart_page
+    
+    # ✅ PERBAIKAN: Redirect ke cart_page, bukan checkout
+    return redirect(url_for('cart.cart_page'))
 
 @cart_bp.route('/remove_from_cart', methods=['POST'])
 @login_required
@@ -69,7 +72,7 @@ def remove_from_cart():
     # Hapus dari keranjang
     CartManager.remove_from_cart(product_id)
     flash(f'🗑️ {product_name} berhasil dihapus dari keranjang.', 'success')
-    return redirect(url_for('cart.cart_page'))  # ← HARUS ke cart_page
+    return redirect(url_for('cart.cart_page'))
 
 @cart_bp.route('/clear_cart', methods=['POST'])
 @login_required
@@ -90,7 +93,7 @@ def clear_cart():
     item_count = len(cart)
     CartManager.clear_cart()
     flash(f'🗑️ Berhasil menghapus {item_count} jenis produk dari keranjang!', 'success')
-    return redirect(url_for('cart.cart_page'))  # ← HARUS ke cart_page
+    return redirect(url_for('cart.cart_page'))
 
 @cart_bp.route('/Cart.html')
 @login_required

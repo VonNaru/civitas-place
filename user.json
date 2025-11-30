@@ -16,5 +16,10 @@
     "username": "MAX@gmail.com",
     "password_hash": "pbkdf2:sha256:1000000$azEF6HmboNH333pP$72b1e507d5976fb76b38a889b5fced127b89e00dad913bcabd8bc0bf70c78463",
     "full_name": "Max"
+  },
+  "siesta@gmail.com": {
+    "username": "siesta@gmail.com",
+    "password_hash": "pbkdf2:sha256:1000000$DELnCHGUJg1OuWoS$d255c19186266b935e4e3ae2eeadd357b91b6566257313906cb3e0d2ca033897",
+    "full_name": "siesta"
   }
 }

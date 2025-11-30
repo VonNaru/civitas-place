@@ -39,37 +39,22 @@ header .container img {
     font-size: 1.5rem;
 }
 
+/* === NAVBAR STYLING === */
 header nav {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
-header input[type="search"] {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 1rem;
-}
-
-.nav-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid #007bff;
-    background-color: #eef0f1;
-    color: #007bff;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 0.5rem;
-}
-
-.nav-button.cart {
+header nav .nav-button {
     background-color: white;
-    color: #007bff;
-}
-
-.nav-button:hover{
-    background-color:#007bff;
-    color: white;
-    transition: all 0.3s ease;
+    color: #1abc9c;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 /* === User Menu Dropdown === */

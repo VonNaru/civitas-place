@@ -30,7 +30,7 @@ class CartManager:
         return sum(item['price'] * item['quantity'] for item in cart)
     
     @staticmethod
-    def add_to_cart(product_id, name, price, quantity=1):
+    def add_to_cart(product_id, name, price, quantity=1, phone=None):
         """
         Menambahkan produk ke keranjang
         Args:
@@ -38,6 +38,7 @@ class CartManager:
             name: Nama produk
             price: Harga produk
             quantity: Jumlah produk (default: 1)
+            phone: Nomor telepon produk
         """
         cart = CartManager.get_cart()
         
@@ -53,7 +54,8 @@ class CartManager:
                 'product_id': product_id,
                 'name': name,
                 'price': int(price),
-                'quantity': quantity
+                'quantity': quantity,
+                'phone': phone  # ← TAMBAHAN: Simpan nomor telepon
             })
         
         # Simpan kembali ke session

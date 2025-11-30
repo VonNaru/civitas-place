@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk</title>
     <link rel="stylesheet" href="/static/css/css barang/barang1.css">
-    <style>
-
-    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
             <nav>
-                <input type="search" placeholder="Cari produk...">
                 <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
                 <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
                 
@@ -42,6 +38,7 @@
                 <h1 class="product-title">{{ product.name if product else 'Sepatu' }}</h1>
                 <p class="product-price">Rp {{ '{:,.0f}'.format(product.price) if product else '450.000' }}</p>
                 <p><strong>Stok: </strong> {{ product.stock if product else 0 }}</p>
+                <p><strong>📞 Kontak Penjual: </strong> {{ product.phone if product else '081234567891' }}</p>
 
                 <div class="product-description">
                     <h3>Deskripsi Produk</h3>
@@ -58,6 +55,7 @@
                     <input type="hidden" name="product_id" value="{{ product.id if product else 'p_sepatu_2' }}">
                     <input type="hidden" name="name" value="{{ product.name if product else 'Sepatu' }}">
                     <input type="hidden" name="price" value="{{ product.price if product else 450000 }}">
+                    <input type="hidden" name="phone" value="{{ product.phone if product else '081234567891' }}">
                     <input type="number" name="quantity" value="1" min="1" max="{{ product.stock if product else 0 }}" class="quantity-input"
                            {% if product and product.stock <= 0 %} disabled {% endif %}>
                     <button type="submit" class="buy-button"

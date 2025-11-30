@@ -1,0 +1,231 @@
+.confirmation-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: bounce 0.6s;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.confirmation-box {
+    background: white;
+    border: 2px solid #2a9d8f;
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.confirmation-message {
+    font-size: 1.1rem;
+    color: #2a9d8f;
+    font-weight: bold;
+}
+
+.order-id {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #2c3e50;
+    background: #f0f9f7;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 20px 0;
+    word-break: break-all;
+}
+
+.info-section {
+    text-align: left;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.info-value {
+    color: #666;
+}
+
+.info-value.location-details {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    line-height: 1.6;
+}
+
+.info-value.total-amount {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.payment-method-info {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.order-status {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+/* ✅ STYLING BARU UNTUK ITEM CONTACT */
+.item-contact {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.item-contact:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2a9d8f;
+}
+
+.item-header strong {
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+.item-quantity {
+    background: #2a9d8f;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-info,
+.price-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.phone-number {
+    background: #e8f5e8;
+    color: #2e7d32;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.subtotal {
+    background: #fff3e0;
+    color: #f57c00;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.item-separator {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ddd, transparent);
+    margin-top: 15px;
+}
+
+.no-items {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 20px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #2a9d8f;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1f7a6a;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #666;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #555;
+    transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .item-details {
+        gap: 15px;
+    }
+    
+    .contact-info,
+    .price-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .phone-number,
+    .subtotal {
+        align-self: stretch;
+        text-align: center;
+    }
+}

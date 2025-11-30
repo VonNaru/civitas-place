@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyMarket</title>
+    <title>Civitas Market</title>
     <link rel="stylesheet" href="/static/css/home.css">
 </head>
 <body>
@@ -14,9 +14,8 @@
                 <img src="/static/pcture/Logo.png" alt="">
             </a>
             <nav>
-                <input type="search" placeholder="Cari produk...">
                 <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
-                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
                 
                 {% if session.get('user_name') %}
                 <details class="user-menu-details">
@@ -40,7 +39,7 @@
                 <!-- Produk 1 -->
                 <a href="/barang/Barang1.html" style="text-decoration: none; color: inherit;">
                     <div class="product-card">
-                        <img src="/static/pcture/download.jpeg" alt="Gambar Produk">
+                        <img src="/static/pcture/Batu.jpg" alt="Gambar Produk">
                         <div class="product-info">
                             <h3>Produk Keren 1</h3>
                             <p class="price">Rp 150,000</p>

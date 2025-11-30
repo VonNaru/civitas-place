@@ -1,0 +1,98 @@
+[
+    {
+        "order_id": "ORD-59A9D47E",
+        "user_id": "bjir@gmail.com",
+        "user_email": "bjir@gmail.com",
+        "fullname": "Naru",
+        "phone": "89636869329",
+        "items": [
+            {
+                "name": "Sepatu",
+                "price": 450000,
+                "quantity": 1,
+                "phone": "081234567891"
+            },
+            {
+                "name": "Headphone",
+                "price": 800000,
+                "quantity": 1,
+                "phone": "081234567892"
+            }
+        ],
+        "total": 1250000,
+        "pickup_location": "loc_setulo_pradita",
+        "status": "menunggu_pembayaran",
+        "payment_status": "pending",
+        "created_at": "2025-11-27T17:56:36.342987",
+        "notes": "15:00"
+    },
+    {
+        "order_id": "ORD-AC97C1C6",
+        "user_id": "bjir@gmail.com",
+        "user_email": "bjir@gmail.com",
+        "fullname": "Naru",
+        "phone": "89636869329",
+        "items": [
+            {
+                "name": "Produk Keren 1",
+                "price": 150000,
+                "quantity": 1,
+                "phone": "081234567890"
+            }
+        ],
+        "total": 150000,
+        "pickup_location": "loc_setulo_pradita",
+        "status": "menunggu_pembayaran",
+        "payment_status": "pending",
+        "created_at": "2025-11-27T17:57:13.945420",
+        "notes": "15:00"
+    },
+    {
+        "order_id": "ORD-436D4812",
+        "user_id": "bjir@gmail.com",
+        "user_email": "bjir@gmail.com",
+        "fullname": "Naru",
+        "phone": "89636869329",
+        "items": [
+            {
+                "name": "Produk Keren 1",
+                "price": 150000,
+                "quantity": 1,
+                "phone": "081234567890"
+            },
+            {
+                "name": "Headphone",
+                "price": 800000,
+                "quantity": 1,
+                "phone": "081234567892"
+            }
+        ],
+        "total": 950000,
+        "pickup_location": "loc_setulo_pradita",
+        "status": "menunggu_pembayaran",
+        "payment_status": "pending",
+        "created_at": "2025-11-27T18:03:01.506069",
+        "notes": "15:00"
+    },
+    {
+        "order_id": "ORD-9FB77B36",
+        "user_id": "bjir@gmail.com",
+        "user_email": "bjir@gmail.com",
+        "fullname": "Naru",
+        "phone": "89636869329",
+        "items": [
+            {
+                "name": "Sepatu",
+                "price": 450000,
+                "quantity": 1,
+                "phone": "081234567891"
+            }
+        ],
+        "total": 450000,
+        "pickup_location": "loc_student_center",
+        "status": "menunggu_pembayaran",
+        "payment_status": "pending",
+        "created_at": "2025-11-28T10:19:21.550764",
+        "notes": "15:00"
+    }
+]

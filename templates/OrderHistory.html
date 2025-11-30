@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Pesanan</title>
+    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="/static/css/order-history.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
+            <nav>
+                <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
+                
+                {% if session.get('user_name') %}
+                <details class="user-menu-details">
+                    <summary>{{ session.get('user_name') }} ▼</summary>
+                    <div class="dropdown-menu">
+                        <a href="/Dasboard.html">👤 Profil</a>
+                        <form method="POST" action="/logout">
+                            <button type="submit" class="logout-btn">🚪 Logout</button>
+                        </form>
+                    </div>
+                </details>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <div class="order-history-container">
+        <h1>📋 Riwayat Pesanan</h1>
+        
+        {% if orders %}
+            {% for order in orders %}
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-id">Order #{{ order.order_id }}</div>
+                    <div class="order-date">{{ order.created_at[:10] }}</div>
+                </div>
+                
+                <div class="order-body">
+                    <div class="order-info">
+                        <div class="info-item">
+                            <span class="label">Status:</span>
+                            <span class="value status-{{ order.status }}">{{ order.status.title() }}</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="label">Total:</span>
+                            <span class="value total">Rp {{ '{:,.0f}'.format(order.total) }}</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="label">Penerima:</span>
+                            <span class="value">{{ order.fullname }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- ✅ PERBAIKAN: Akses items sebagai dictionary key -->
+                    <div class="order-items">
+                        <h4>📦 Item yang Dipesan:</h4>
+                        {% if order['items'] %}
+                            {% for item in order['items'] %}
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <strong>{{ item.name }}</strong> ({{ item.quantity }}x)
+                                    <div class="item-contact">
+                                        📞 Kontak: {{ item.phone if item.phone else 'Tidak tersedia' }}
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    Rp {{ '{:,.0f}'.format(item.price * item.quantity) }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="no-items">Tidak ada item</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="order-actions">
+                    <a href="{{ url_for('checkout.order_confirmation', order_id=order.order_id) }}" 
+                       class="btn-detail">Lihat Detail</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📋</div>
+                <h2>Belum Ada Pesanan</h2>
+                <p>Anda belum membuat pesanan apapun.</p>
+                <a href="/Home_pages.html" class="btn-shop">🛍️ Mulai Belanja</a>
+            </div>
+        {% endif %}
+        
+        <div class="back-to-home">
+            <a href="/Home_pages.html" class="btn-back">← Kembali ke Beranda</a>
+        </div>
+    </div>
+</body>
+</html>
