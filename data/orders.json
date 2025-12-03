@@ -94,5 +94,47 @@
         "payment_status": "pending",
         "created_at": "2025-11-28T10:19:21.550764",
         "notes": "15:00"
+    },
+    {
+        "order_id": "ORD-9C9463D5",
+        "user_id": "bjir@gmail.com",
+        "user_email": "bjir@gmail.com",
+        "fullname": "Naru",
+        "phone": "89636869329",
+        "items": [
+            {
+                "name": "Headphone",
+                "price": 800000,
+                "quantity": 1,
+                "phone": "081234567892"
+            }
+        ],
+        "total": 800000,
+        "pickup_location": "loc_setulo_pradita",
+        "status": "menunggu_pembayaran",
+        "payment_status": "pending",
+        "created_at": "2025-12-01T14:29:51.538154",
+        "notes": "15:00"
+    },
+    {
+        "order_id": "ORD-8758FA46",
+        "user_id": "bjir@gmail.com",
+        "user_email": "bjir@gmail.com",
+        "fullname": "Naru",
+        "phone": "09090909090909",
+        "items": [
+            {
+                "name": "Laptop",
+                "price": 22000000,
+                "quantity": 1,
+                "phone": "081234567893"
+            }
+        ],
+        "total": 22000000,
+        "pickup_location": "loc_kantin",
+        "status": "menunggu_pembayaran",
+        "payment_status": "pending",
+        "created_at": "2025-12-01T14:52:49.807325",
+        "notes": "mau"
     }
 ]

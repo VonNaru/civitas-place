@@ -123,6 +123,7 @@ def order_confirmation(order_id):
                          location=location)
 
 @checkout_bp.route('/orders')
+@checkout_bp.route('/OrderHistory.html')  # ✅ TAMBAH alias URL
 @login_required
 def order_history():
     """Halaman riwayat pesanan"""
