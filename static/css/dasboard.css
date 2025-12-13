@@ -266,6 +266,71 @@ header nav .nav-button.cart:hover {
     transform: translateY(-2px);
 }
 
+/* === FLASH MESSAGES === */
+.flash-messages {
+    margin-bottom: 2rem;
+}
+
+.flash-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: bold;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === FORM STYLING === */
+.dashboard-card form input[type="text"],
+.dashboard-card form input[type="number"] {
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.dashboard-card form input[type="text"]:focus,
+.dashboard-card form input[type="number"]:focus {
+    outline: none;
+    border-color: #1abc9c;
+    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+}
+
+.dashboard-card form button {
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.dashboard-card form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(26, 188, 156, 0.3);
+}
+
+/* === PRODUCT MANAGEMENT STYLING === */
+.dashboard-card .product-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin: 8px 0;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-card .product-item:hover {
+    background-color: #e9ecef;
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
     header .container {
@@ -285,5 +350,18 @@ header nav .nav-button.cart:hover {
     .stats {
         flex-direction: column;
         gap: 1rem;
+    }
+    
+    .dashboard-card form {
+        text-align: left;
+    }
+    
+    .dashboard-card form > div {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    
+    .dashboard-card form input {
+        width: 100% !important;
     }
 }

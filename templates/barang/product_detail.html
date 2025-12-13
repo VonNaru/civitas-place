@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Produk</title>
+    <title>{{ product.name }} - Detail Produk</title>
     <link rel="stylesheet" href="/static/css/home.css">
     <link rel="stylesheet" href="/static/css/css barang/barang1.css">
     <link rel="stylesheet" href="/static/css/product-detail.css">
@@ -13,7 +13,7 @@
 <body>
     <header>
         <div class="container">
-            <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt=""></a>
+            <a href="/Home_pages.html"><img src="/static/pcture/Logo.png" alt="Logo"></a>
             <nav>
                 <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
                 <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
@@ -54,12 +54,12 @@
             <div class="product-info">
                 <h1 class="product-title">{{ product.name }}</h1>
                 <p class="product-price">Rp {{ '{:,.0f}'.format(product.price) }}</p>
-                <p><strong>Stok: </strong> 
+                <p><strong>Stok: </strong>
                     <span class="{% if product.stock <= 0 %}stock-out{% elif product.stock <= 5 %}stock-low{% else %}stock-available{% endif %}">
                         {{ product.stock }} item{% if product.stock <= 5 and product.stock > 0 %} (Terbatas!){% elif product.stock <= 0 %} (Habis){% endif %}
                     </span>
                 </p>
-                <p><strong>📞 Kontak Penjual: </strong> {{ product.phone }}</p>
+                <p><strong>📞 Kontak Penjual: </strong>{{ product.phone }}</p>
 
                 <div class="product-description">
                     <h3>Deskripsi Produk</h3>

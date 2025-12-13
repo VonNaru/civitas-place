@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from utils.decorators import login_required
 from models.cart import CartManager
 from models.products import ProductsManager
@@ -12,35 +12,44 @@ def add_to_cart():
     """
     Menambahkan produk ke keranjang belanja.
     """
-    # Ambil data produk dari form
-    product_id = request.form.get('product_id')
-    name = request.form.get('name')
-    price = request.form.get('price')
-    phone = request.form.get('phone')  # Nomor telepon penjual
-    quantity = int(request.form.get('quantity', 1))
+    # Ambil data produk dari form atau JSON
+    product_id = request.form.get('product_id') or request.json.get('product_id')
+    quantity = int(request.form.get('quantity', 1) or request.json.get('quantity', 1))
     
-    # Validasi data produk
-    if not product_id or not name or not price:
-        flash('Data produk tidak lengkap!', 'error')
+    # Ambil data produk dari database
+    product = ProductsManager.get(product_id)
+    if not product:
+        if request.is_json:
+            return jsonify({'success': False, 'message': 'Produk tidak ditemukan!'})
+        flash('Produk tidak ditemukan!', 'error')
         return redirect(request.referrer or url_for('pages.home_page'))
     
     # Cek stok
     stock = ProductsManager.get_stock(product_id)
     if stock < quantity:
-        flash(f'Stok tidak cukup! Tersisa {stock} item untuk {name}.', 'error')
+        message = f'Stok tidak cukup! Tersisa {stock} item untuk {product["name"]}.'
+        if request.is_json:
+            return jsonify({'success': False, 'message': message})
+        flash(message, 'error')
         return redirect(request.referrer)
 
     # Kurangi stok lalu tambahkan ke cart
     ok = ProductsManager.change_stock(product_id, -quantity)
     if not ok:
-        flash('Gagal mengupdate stok. Silakan coba lagi.', 'error')
+        message = 'Gagal mengupdate stok. Silakan coba lagi.'
+        if request.is_json:
+            return jsonify({'success': False, 'message': message})
+        flash(message, 'error')
         return redirect(request.referrer or url_for('pages.home_page'))
 
-    # Tambahkan ke keranjang dengan nomor telepon
-    CartManager.add_to_cart(product_id, name, price, quantity, phone)
-    flash(f'✅ {name} berhasil ditambahkan ke keranjang!', 'success')
+    # Tambahkan ke keranjang
+    CartManager.add_to_cart(product_id, product['name'], product['price'], quantity, product.get('phone', ''))
+    message = f'✅ {product["name"]} berhasil ditambahkan ke keranjang!'
     
-    # ✅ PERBAIKAN: Redirect ke cart_page, bukan checkout
+    if request.is_json:
+        return jsonify({'success': True, 'message': message})
+    
+    flash(message, 'success')
     return redirect(url_for('cart.cart_page'))
 
 @cart_bp.route('/remove_from_cart', methods=['POST'])

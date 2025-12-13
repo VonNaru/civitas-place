@@ -15,7 +15,7 @@
             </a>
             <nav>
                 <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
-                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
                 
                 {% if session.get('user_name') %}
                 <details class="user-menu-details">
@@ -36,54 +36,30 @@
         <div class="container">
             
             <div class="product-grid">
-                <!-- Produk 1 -->
-                <a href="/barang/Barang1.html" style="text-decoration: none; color: inherit;">
+                {% for pid, product in products.items() %}
+                    {% if product.stock > 0 %}
                     <div class="product-card">
-                        <img src="/static/pcture/Batu.jpg" alt="Gambar Produk">
+                        <img src="{{ product.image }}" alt="{{ product.name }}" onerror="this.src='/static/pcture/default.svg'">
                         <div class="product-info">
-                            <h3>Produk Keren 1</h3>
-                            <p class="price">Rp 150,000</p>
-                            <a href="/barang/Barang1.html" class="buy-button">Lihat</a>
+                            <h3>{{ product.name }}</h3>
+                            <p class="price">Rp {{ '{:,.0f}'.format(product.price) }}</p>
+                            <p class="stock">Stok: {{ product.stock }}</p>
+                            <a href="/product/{{ pid }}" class="buy-button">Lihat Detail</a>
                         </div>
                     </div>
-                </a>
-
-                <!-- Produk 2 -->
-                <a href="/barang/barang2.html" style="text-decoration: none; color: inherit;">
-                    <div class="product-card">
-                        <img src="/static/pcture/2-1.jpg" alt="Gambar Produk">
-                        <div class="product-info">
-                            <h3>Sepatu</h3>
-                            <p class="price">Rp 450,000</p>
-                            <a href="/barang/barang2.html" class="buy-button">Lihat</a>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Produk 3 -->
-                <a href="/barang/barang3.html" style="text-decoration: none; color: inherit;">
-                    <div class="product-card">
-                        <img src="/static/pcture/headsphone.jpeg" alt="Gambar Produk">
-                        <div class="product-info">
-                            <h3>Headphone</h3>
-                            <p class="price">Rp 800,000</p>
-                            <a href="/barang/barang3.html" class="buy-button">Lihat</a>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Produk 4 -->
-                <a href="/barang/barang4.html" style="text-decoration: none; color: inherit;">
-                    <div class="product-card">
-                        <img src="/static/pcture/laptop.jpeg" alt="Gambar Produk">
-                        <div class="product-info">
-                            <h3>Laptop</h3>
-                            <p class="price">Rp 22,000,000</p>
-                            <a href="/barang/barang4.html" class="buy-button">Lihat</a>
-                        </div>
-                    </div>
-                </a>
+                    {% endif %}
+                {% endfor %}
+                
+                <!-- Jika tidak ada produk -->
+                {% if not products %}
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                    <h3>Belum ada produk tersedia</h3>
+                    <p>Admin dapat menambahkan produk melalui dashboard</p>
+                </div>
+                {% endif %}
             </div>
+
+
         </div>
     </main>
 

@@ -63,3 +63,24 @@ class ProductsManager:
         p['stock'] = new
         cls._save(data)
         return True
+
+    @classmethod
+    def add_product(cls, product_data):
+        """Menambahkan produk baru ke dalam database"""
+        data = cls._load()
+        product_id = product_data.get('id')
+        if product_id and product_id not in data:
+            data[product_id] = product_data
+            cls._save(data)
+            return True
+        return False
+
+    @classmethod
+    def generate_product_id(cls):
+        """Generate ID produk baru"""
+        data = cls._load()
+        existing_ids = list(data.keys())
+        counter = 1
+        while f"p_produk_{counter}" in existing_ids:
+            counter += 1
+        return f"p_produk_{counter}"

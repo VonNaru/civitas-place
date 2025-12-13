@@ -35,6 +35,17 @@
     <!-- ✅ PERBAIKAN 4: Tambah konten dashboard -->
     <main class="dashboard-content">
         <div class="container">
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <div class="flash-message">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
             <h1>🎉 Selamat Datang, {{ session.get('user_name', 'User') }}!</h1>
             
             <div class="dashboard-grid">
@@ -64,6 +75,25 @@
                     </div>
                 </div>
                 
+                <!-- Tambah Produk Baru -->
+                <div class="dashboard-card">
+                    <h3>➕ Tambah Produk Baru</h3>
+                    <form method="post" action="/add_product" style="display:flex; flex-direction:column; gap:12px;">
+                        <div style="display:flex; gap:8px;">
+                            <input type="text" name="name" placeholder="Nama Produk" required style="flex:1; padding:8px;">
+                            <input type="number" name="price" placeholder="Harga" required min="0" style="width:120px; padding:8px;">
+                        </div>
+                        <div style="display:flex; gap:8px;">
+                            <input type="number" name="stock" placeholder="Stok" required min="0" style="width:80px; padding:8px;">
+                            <input type="text" name="image" placeholder="Path Gambar (opsional)" style="flex:1; padding:8px;">
+                        </div>
+                        <div style="display:flex; gap:8px;">
+                            <input type="text" name="phone" placeholder="No. Telepon (opsional)" style="flex:1; padding:8px;">
+                            <button type="submit" class="btn-primary" style="padding:8px 16px;">Tambah Produk</button>
+                        </div>
+                    </form>
+                </div>
+
                 <!-- Kelola Stok Produk -->
                 <div class="dashboard-card">
                     <h3>⚙️ Kelola Stok Produk</h3>

@@ -208,7 +208,19 @@ main h2 {
     font-size: 1.15rem;
     font-weight: bold;
     color: #e63946;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.stock {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.stock.out-of-stock {
+    color: #e63946;
+    font-weight: bold;
 }
 
 .buy-button {

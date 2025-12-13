@@ -3,15 +3,15 @@
     "id": "p_produk_1",
     "name": "Produk Keren 1",
     "price": 150000,
-    "stock": 2,
-    "image": "/static/pcture/download.jpeg",
+    "stock": 5,
+    "image": "/static/pcture/Batu.jpg",
     "phone": "081234567890"
   },
   "p_sepatu_2": {
     "id": "p_sepatu_2",
     "name": "Sepatu",
     "price": 450000,
-    "stock": 1,
+    "stock": 3,
     "image": "/static/pcture/2-1.jpg",
     "phone": "081234567891"
   },
@@ -19,7 +19,7 @@
     "id": "p_headphone_3",
     "name": "Headphone",
     "price": 800000,
-    "stock": 0,
+    "stock": 2,
     "image": "/static/pcture/headsphone.jpeg",
     "phone": "081234567892"
   },
@@ -30,5 +30,21 @@
     "stock": 1,
     "image": "/static/pcture/laptop.jpeg",
     "phone": "081234567893"
+  },
+  "p_produk_5": {
+    "id": "p_produk_5",
+    "name": "pisang",
+    "price": 10000,
+    "stock": 4,
+    "image": "/static/pcture/default.svg",
+    "phone": "081234567890"
+  },
+  "p_produk_2": {
+    "id": "p_produk_2",
+    "name": "siesta",
+    "price": 1500,
+    "stock": 1,
+    "image": "/static/pcture/default.svg",
+    "phone": "081234567890"
   }
 }
