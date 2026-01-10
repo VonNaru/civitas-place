@@ -87,7 +87,7 @@ def add_product():
         'name': name,
         'price': price,
         'stock': stock,
-        'image': image or '/static/pcture/default.svg',
+        'image': image or '/static/picture/default.svg',
         'phone': phone or '081234567890'
     }
     

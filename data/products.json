@@ -3,7 +3,7 @@
     "id": "p_produk_1",
     "name": "Produk Keren 1",
     "price": 150000,
-    "stock": 5,
+    "stock": 4,
     "image": "/static/pcture/Batu.jpg",
     "phone": "081234567890"
   },
@@ -11,7 +11,7 @@
     "id": "p_sepatu_2",
     "name": "Sepatu",
     "price": 450000,
-    "stock": 3,
+    "stock": 2,
     "image": "/static/pcture/2-1.jpg",
     "phone": "081234567891"
   },
@@ -45,6 +45,14 @@
     "price": 1500,
     "stock": 1,
     "image": "/static/pcture/default.svg",
+    "phone": "081234567890"
+  },
+  "p_produk_3": {
+    "id": "p_produk_3",
+    "name": "kaos",
+    "price": 30000,
+    "stock": 10,
+    "image": "/static/picture/default.svg",
     "phone": "081234567890"
   }
 }

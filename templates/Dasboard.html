@@ -14,14 +14,14 @@
             <nav>
                 <!-- ❌ HAPUS: <input type="search" placeholder="Cari produk..."> -->
                 <a href="/Dasboard.html" style="text-decoration: none;"><button class="nav-button">Dashboard</button></a>
-                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang ({{ cart_count|default(0) }})</button></a>
+                <a href="/Cart.html" style="text-decoration: none;"><button class="nav-button cart">Keranjang</button></a>
                 
                 <!-- ✅ PERBAIKAN 3: Tambah user dropdown menu -->
                 {% if session.get('user_name') %}
                 <details class="user-menu-details">
                     <summary>{{ session.get('user_name') }} ▼</summary>
                     <div class="dropdown-menu">
-                        <a href="/OrderHistory.html">👤 Profil</a>
+                        <a href="/OrderHistory.html">👤 History</a>
                         <form method="POST" action="/logout">
                             <button type="submit" class="logout-btn">🚪 Logout</button>
                         </form>
